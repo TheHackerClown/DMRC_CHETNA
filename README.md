@@ -3,6 +3,10 @@
 
 A simple CLI tool to interact with DMRC Chetna AI from your terminal.
 
+# Response
+
+Till now the response is in format of JSON, you can customize it to get clean results.
+
 ## Project Structure
 
 - `index.ts` - Main entry point of the application
