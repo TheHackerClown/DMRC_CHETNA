@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import { chromium } from "playwright";
+import { chromium, Cookie } from "playwright";
 import promptSync from "prompt-sync";
 
 const BASE_URL = "https://chatbot.delhimetrorail.com";
@@ -13,9 +13,9 @@ interface ChatbotAuth {
 }
 
 export async function getChatbotAuth(): Promise<ChatbotAuth> {
+  console.log("Loading... [fetching cookies and user access tokens]");
   const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({
-  });
+  const context = await browser.newContext({});
 
   const page = await context.newPage();
   await page.goto(BASE_URL, { waitUntil: "networkidle" });
@@ -56,9 +56,12 @@ export async function getChatbotAuth(): Promise<ChatbotAuth> {
 
   // Extract cookies for headers
   const cookies = await context.cookies();
-  const cookieHeader = cookies.map(c => `${c.name}=${c.value}`).join("; ");
+
+  const cookieHeader = cookies.map((c:Cookie) => `${c.name}=${c.value}`).join("; ");
 
   await browser.close();
+
+  console.log("✅ Fetched tokens and cookies successfully.");
 
   return {
     userToken,
@@ -73,12 +76,12 @@ async function main() {
 
   const prompt = promptSync({ sigint: true });
 
-  console.log("DMRC Chetna Browser Bypass\n Type 'exit' to quit.\n");
+  console.log("☠ DMRC Chetna Browser Bypass\n\nType '/bye' to quit.\n");
 
   while (true) {
     const query = prompt("You> ");
-    if (!query || query.toLowerCase() === "exit") {
-      console.log("!!Chat ended!!");
+    if (!query || query.toLowerCase() === "/bye") {
+      console.log("--!!Chat ended!!--");
       break;
     }
 
