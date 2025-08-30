@@ -1,4 +1,11 @@
 {
+	"name": "dmrc_chetna_cli",
+  	"version": "1.0.0",
+  	"description": "",
+  	"main": "index.ts",
+  	"keywords": [],
+  	"author": "TheHackerClown",
+  	"license": "GPL-3.0-only",
 	"scripts": {
 		"start": "ts-node index.ts"
 	},
